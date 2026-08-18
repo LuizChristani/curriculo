@@ -1,8 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 body {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     background-color: whitesmoke;
     font-family: "Poppins", sans-serif;
     font-weight: 400;
@@ -11,12 +17,14 @@ body {
 }
 
 h1, p {
-    margin: 0px;
+    margin: 0;
 }
 
 ul {
     display: flex;
-    gap: 28px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px 28px;
     margin: 0;
     padding: 0;
 }
@@ -36,7 +44,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 16px 0;
+    padding: 16px 20px;
     background-color: #111827;
 }
 
@@ -46,37 +54,47 @@ header {
     padding: 50px 10vw;
     justify-content: space-between;
     gap: 24px;
-    box-sizing: border-box;
 }
 
 #header-profile {
     display: flex;
-    gap: 10px
+    gap: 10px;
+    min-width: 0;
+    flex: 1 1 240px;
+}
+
+#header-profile > div {
+    min-width: 0;
+}
+
+#header-profile h1,
+#header-profile p {
+    overflow-wrap: anywhere;
 }
 
 header img {
     width: 100px;
     height: 100px;
+    flex-shrink: 0;
     object-fit: cover;
     border-radius: 100%;
 }
 
 #projetos {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 500px), 500px));
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 500px));
     justify-content: center;
     gap: 20px;
     padding: 20px;
-    height: 60vh;
-    box-sizing: border-box;
 }
 
 #projetos > div {
     width: 100%;
-    min-height: 22.6vh;
+    min-width: 0;
+    min-height: 180px;
     display: flex;
     padding: 20px;
-    box-sizing: border-box;
     background-color: #ffffff;
     border: 1px solid #c9cacc;
     flex-direction: column;
@@ -87,25 +105,29 @@ header img {
 #projetos > div h1 {
     color: #111827;
     font-size: 22px;
+    overflow-wrap: anywhere;
 }
 
 #projetos > div p {
     color: #4b5563;
     margin-top: 8px;
+    overflow-wrap: anywhere;
 }
 
 #tecnologias {
     display: flex;
-    justify-content: end;
-    align-items: end;
+    justify-content: flex-end;
+    align-items: flex-end;
     flex-direction: column;
     gap: 10px;
+    min-width: 0;
+    flex: 1 1 240px;
 }
 
 .badge {
     display: flex;
     flex-wrap: wrap;
-    justify-content: end;
+    justify-content: flex-end;
     gap: 5px;
 }
 
@@ -118,7 +140,7 @@ header img {
 }
 
 .tech-badge {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 6px;
     padding: 4px 10px;
@@ -137,9 +159,12 @@ header img {
 #contatos {
     display: flex;
     flex-direction: column;
-    justify-content: end;
     align-items: center;
+    justify-content: center;
     gap: 8px;
+    width: 100%;
+    padding: 24px 20px 96px;
+    text-align: center;
 }
 
 #contatos h1 {
@@ -150,6 +175,9 @@ header img {
 #contatos a {
     color: #4b5563;
     text-decoration: none;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 #contatos a:hover {
@@ -173,10 +201,104 @@ footer {
     width: 100%;
     display: flex;
     position: fixed;
+    left: 0;
+    bottom: 0;
     align-items: center;
-    bottom: 0px;
     justify-content: center;
-    padding: 16px 0;
+    padding: 16px 20px;
     color: white;
     background-color: #111827;
+    text-align: center;
+}
+
+footer p {
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 768px) {
+    nav {
+        padding: 12px;
+    }
+
+    ul {
+        gap: 10px 16px;
+        font-size: 14px;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 24px 16px;
+    }
+
+    #header-profile,
+    #tecnologias {
+        flex: none;
+        width: 100%;
+    }
+
+    #header-profile {
+        align-items: center;
+    }
+
+    #header-profile h1 {
+        font-size: 22px;
+        line-height: 1.2;
+    }
+
+    #header-profile p {
+        font-size: 14px;
+    }
+
+    header img {
+        width: 72px;
+        height: 72px;
+    }
+
+    #tecnologias {
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+
+    .badge {
+        justify-content: flex-start;
+    }
+
+    #projetos {
+        padding: 16px;
+        gap: 12px;
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    #projetos > div {
+        min-height: 0;
+        padding: 16px;
+    }
+
+    #projetos > div h1 {
+        font-size: 18px;
+    }
+
+    #projetos > div p {
+        font-size: 14px;
+    }
+
+    .tech-badge {
+        padding: 3px 8px;
+        font-size: 13px;
+    }
+
+    .tech-badge i {
+        font-size: 16px;
+    }
+
+    #contatos {
+        padding: 16px 16px 24px;
+    }
+
+    footer {
+        position: static;
+        padding: 12px 16px;
+        font-size: 12px;
+    }
 }
