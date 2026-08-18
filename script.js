@@ -73,7 +73,7 @@ aplications.forEach((item) => {
 
 document.getElementById("ano").textContent = new Date().getFullYear();
 
-const titleBySection = {
+const titleSection = {
     sobre: () => document.getElementById('nome'),
     projetos: () => document.querySelector('#projetos > div h1'),
     tecnologia: () => document.getElementById('tecnologia'),
@@ -83,7 +83,7 @@ const titleBySection = {
 document.querySelectorAll('nav a[href^="#"]').forEach((link) => {
     link.addEventListener('click', () => {
         const id = link.getAttribute('href').slice(1);
-        const title = titleBySection[id]?.();
+        const title = titleSection[id]?.();
         if (!title) {
             return;
         }
