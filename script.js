@@ -72,3 +72,24 @@ aplications.forEach((item) => {
 })
 
 document.getElementById("ano").textContent = new Date().getFullYear();
+
+const titleBySection = {
+    sobre: () => document.getElementById('nome'),
+    projetos: () => document.querySelector('#projetos > div h1'),
+    tecnologia: () => document.getElementById('tecnologia'),
+    contatos: () => document.querySelector('#contatos h1'),
+};
+
+document.querySelectorAll('nav a[href^="#"]').forEach((link) => {
+    link.addEventListener('click', () => {
+        const id = link.getAttribute('href').slice(1);
+        const title = titleBySection[id]?.();
+        if (!title) {
+            return;
+        }
+
+        title.classList.remove('pulse');
+        void title.offsetWidth;
+        title.classList.add('pulse');
+    });
+});
